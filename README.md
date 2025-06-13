@@ -8,19 +8,13 @@ Below are two example images demonstrating the functionality of the project:
 <div style="display: flex; justify-content: space-around; align-items: center;">
   <div style="text-align: center;">
     <img src="Screenshot_cloud.png" alt="Description of Image 1" width="300"/>
-    <p>Legend for Image 1: This image shows [describe the content or purpose of the image].</p>
+    <p>: Input point cloud.</p>
   </div>
   <div style="text-align: center;">
     <img src="Screenshot_mesh.png" alt="Description of Image 2" width="300"/>
-    <p>Legend for Image 2: This image shows [describe the content or purpose of the image].</p>
+    <p>Resulting alpha-shape for a given alpha value, along with the projected surface on the ground. </p>
   </div>
 </div>
-
-
-![Screenshot](Screenshot_cloud.png)
-
-
-![Screenshot](Screenshot_mesh.png)
 
 
 ## Installation
