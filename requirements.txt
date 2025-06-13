@@ -1,4 +1,7 @@
-numpy==1.21.0
-open3d==0.15.1
-pymeshfix==0.15.0
-pyvista==0.34.0
+numpy>=1.23.5
+open3d>=0.15.1
+pymeshfix>=0.15.0
+pyvista>=0.34.0
+
+
+

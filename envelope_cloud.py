@@ -71,6 +71,7 @@ for file in file_list_txt:
     # project the reduced point cloud "pcd" (can be changed to "pcd_complete")
     copy_pcd = o3d.geometry.PointCloud(pcd) # copy for safety 
     o3d_surf, projected_area = z_project(np.asarray(copy_pcd.points), alpha)
+    print(f"\n PROJECTED AREA ON THE GROUND [m2] : {projected_area}")
     
     #################### save alpha shape as .obj #######################
     
