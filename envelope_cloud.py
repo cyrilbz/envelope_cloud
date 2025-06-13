@@ -13,11 +13,11 @@ Created on Tue Jun  3 11:02:49 2025
 
 ########################## Inputs ##############################
 # relative or absolute path to the directory containing files to study
-directory = '.' 
+directory = './test_data' 
 alpha=0.3
 sampling_ratio = 1/10
 output_file_name = 'results.csv' # written in "directory"
-plot_results = True
+plot_results = False
 ################################################################
 
 import os
