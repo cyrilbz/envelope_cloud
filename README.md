@@ -72,7 +72,12 @@ Ensure you have the following installed on your system:
 
    pip install -r requirements.txt
    ```
-3. Modify the input parameters as you want and run the code!
+3. LINUX USERS
+   You might have to install an additional library to have the open3d viewer option to work:
+   ```bash
+   conda install -c conda-forge libstdcxx-ng
+   ```
+5. Modify the input parameters as you want and run the code!
    ```python
    python envelope_cloud.py
    ```
