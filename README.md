@@ -42,6 +42,14 @@ output_file_name = 'results.csv' # written in "directory"
 plot_results = False # option to plot results using open3d
 ################################################################
 ```
+Do not forget to activate your dedicated conda environment (see instructions below),
+```bash
+conda activate envelope
+```
+then run the code !
+```bash
+python envelope_cloud.py
+```
 
 ## Installation
 
