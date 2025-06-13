@@ -17,7 +17,7 @@ directory = './test_data'
 alpha=0.3
 sampling_ratio = 1/10
 output_file_name = 'results.csv' # written in "directory"
-plot_results = False
+plot_results = False # option to plot results using open3d
 ################################################################
 
 import os
