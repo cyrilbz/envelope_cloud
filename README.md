@@ -60,7 +60,7 @@ Ensure you have the following installed on your system:
    Open a terminal and run the following command to clone the repository:
 
    ```bash
-   git clone https://github.com/cyrilbz/envelope_cloud.git
+   git clone git@github.com:cyrilbz/envelope_cloud.git
    ```
 2. ** Move to the directory, create a dedicated Conda environement, and install all requirements**
    ```bash
