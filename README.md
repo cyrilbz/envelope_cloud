@@ -20,7 +20,26 @@ Below are two example images demonstrating the functionality of the project:
 </div>
 
 ## Usage
-After installing the code (see instructions below), you can run it as you want by modifying the following parameters in the main program (```envelope_cloud.py```)
+After installing the code (see instructions below), you can run it as you want by modifying the following parameters in the main program (```envelope_cloud.py```):
+
+```python
+########################## Inputs ##############################
+# Relative or absolute path to the directory containing files to study
+directory = '.'
+
+# Alpha parameter for the alpha shape algorithm
+alpha = 0.3
+
+# Sampling ratio for the point cloud data
+sampling_ratio = 1/10
+
+# Output file name for saving results, written in "directory"
+output_file_name = 'results.csv'
+
+# Option to plot the results with open3d
+plot_results = True
+################################################################
+```
 
 ## Installation
 
