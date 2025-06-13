@@ -4,6 +4,12 @@ Python tool to compute the envelope (alpha shape) of a 3D point cloud, save it a
 
 Only .txt files are supported as inputs for now but this can be improved with some minor modifications.
 
+
+The code relies on:
+- [Open3d][https://www.open3d.org] for point cloud manipulation, 3d alpha shape creation, and (optional) visualisation,
+- [PyVista][https://docs.pyvista.org/] for mesh/point cloud intersection and 2d mesh creation,
+- [PyMeshFix][https://pymeshfix.pyvista.org/] for alpha shape mesh repair.
+
 ## Example
 
 Below are two example images demonstrating the functionality of the project:
