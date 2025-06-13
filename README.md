@@ -17,7 +17,7 @@ Below are two example images demonstrating the functionality of the project:
 <div style="display: flex; justify-content: space-around; align-items: center;">
   <div style="text-align: center;">
     <img src="Screenshot_cloud.png" alt="Description of Image 1" width="450"/>
-    <p> Input point cloud.</p>
+    <p> Input point cloud that has been downsampled at the given ```sampling_ratio `` value.</p>
   </div>
   <div style="text-align: center;">
     <img src="Screenshot_mesh.png" alt="Description of Image 2" width="450"/>
