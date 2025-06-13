@@ -12,19 +12,18 @@ Created on Tue Jun  3 11:02:49 2025
 ########################################################################
 
 ########################## Inputs ##############################
-directory = '.' # path to the directory containing files to study
-alpha=0.4
+# relative or absolute path to the directory containing files to study
+directory = '.' 
+alpha=0.3
 sampling_ratio = 1/10
-output_file_name = 'results.csv'
+output_file_name = 'results.csv' # written in "directory"
 plot_results = True
 ################################################################
 
 import os
-import csv
-from datetime import datetime
 os.environ['XDG_SESSION_TYPE'] = 'x11' # important to get open3d viewer to work on Linux
 import open3d as o3d
-from functions import (read_from_txt, 
+from functions import (read_from_txt, write_results_to_csv,
                         create_alpha_shape, repair_non_manifold_o3d_mesh,
                         check_envelop_accuracy, z_project)
 import numpy as np
@@ -45,7 +44,7 @@ for file in file_list_txt:
     
     pcd = read_from_txt(file_path) # returns open3d point cloud
     
-    pcd_copy = o3d.geometry.PointCloud(pcd) # save the original point cloud
+    pcd_complete = o3d.geometry.PointCloud(pcd) # save the original point cloud
     
     # point sampling (2nd parameter : sampling ratio in [0-1])
     o3d.geometry.PointCloud.random_down_sample(pcd,sampling_ratio)
@@ -63,13 +62,13 @@ for file in file_list_txt:
     
     #### Compute accuracy of the envelope regarding original cloud ####
     
-    ratio, n_meshes = check_envelop_accuracy(pcd_copy, repaired_o3d_alpha)
+    ratio, n_meshes = check_envelop_accuracy(pcd_complete, repaired_o3d_alpha)
     print(f"\n ALPHA SHAPE ACCURACY [%] : {ratio}")
     print(f"\n NUMBER OF MESHES [-] : {n_meshes}")
     
     #################### 2D projection #####################
     
-    # project the reduced point cloud "pcd" (can be changed to "pcd_copy")
+    # project the reduced point cloud "pcd" (can be changed to "pcd_complete")
     copy_pcd = o3d.geometry.PointCloud(pcd) # copy for safety 
     o3d_surf, projected_area = z_project(np.asarray(copy_pcd.points), alpha)
     
@@ -96,25 +95,9 @@ for file in file_list_txt:
         'Number of envelopes': n_meshes
     }
     
-    # Determine if the file exists to decide whether to write headers
-    file_exists = os.path.isfile(output_file_name)
-    
-    #Open the file in append mode
-    with open(output_file_name, mode='a', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=['date'] + list(results.keys()))
-    
-        # Write the header if the file does not exist
-        if not file_exists:
-            writer.writeheader()
-    
-        # Prepare the row to be written
-        row = {'date': datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-        row.update(results)
-    
-        # Write the row
-        writer.writerow(row)
-    
-    print(f"Results have been written to {output_file_name}")
+    # write results
+    output_path = os.path.join(directory, output_file_name)
+    write_results_to_csv(results, output_path)
     
     ############### plots using open3d ###########################
     
@@ -122,7 +105,6 @@ for file in file_list_txt:
         print("PLOTTING OPTION ACTIVATED - CLOSE OPEN3D WINDOW TO ANALYZE THE NEXT FILE")
         geoms = [{"name":"Point cloud", "geometry": pcd},
                  {"name":"z projection", "geometry": o3d_surf},
-                 {"name":"O3D - Repaired alpha shape", "geometry": repaired_o3d_alpha}]
+                 {"name":"Alpha shape", "geometry": repaired_o3d_alpha}]
         
         o3d.visualization.draw(geoms, show_ui=True)
-    
