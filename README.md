@@ -70,3 +70,7 @@ Ensure you have the following installed on your system:
 
    pip install -r requirements.txt
    ```
+3. Modify the input parameters as you want and run the code!
+   ```python
+   python envelope_cloud.py
+   ```
