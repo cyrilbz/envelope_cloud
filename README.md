@@ -17,13 +17,17 @@ Below are two example images demonstrating the functionality of the project:
 <div style="display: flex; justify-content: space-around; align-items: center;">
   <div style="text-align: center;">
     <img src="Screenshot_cloud.png" alt="Description of Image 1" width="450"/>
-    <p> Input point cloud that has been downsampled at the given ```sampling_ratio `` value.</p>
+    <p> Input point cloud that has been downsampled at the given sampling_ratio value.</p>
   </div>
   <div style="text-align: center;">
     <img src="Screenshot_mesh.png" alt="Description of Image 2" width="450"/>
     <p> Resulting alpha-shape for a given alpha value, along with the projected surface on the ground. </p>
   </div>
 </div>
+
+
+The code outputs in the console and in the output file the alpha shape volume and area, the projected surface on the ground, the accuracy of the alpha shape regarding the point cloud (check the ratio of points inside the envelope compared to the full set of points), and the number of meshes in case of multiple envelopes.
+
 
 ## Usage
 After installing the code (see instructions below), you can run it as you want by modifying the following parameters in the main program (```envelope_cloud.py```):
