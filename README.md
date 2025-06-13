@@ -7,12 +7,12 @@ Below are two example images demonstrating the functionality of the project:
 
 <div style="display: flex; justify-content: space-around; align-items: center;">
   <div style="text-align: center;">
-    <img src="Screenshot_cloud.png" alt="Description of Image 1" width="300"/>
-    <p>: Input point cloud.</p>
+    <img src="Screenshot_cloud.png" alt="Description of Image 1" width="450"/>
+    <p> Input point cloud.</p>
   </div>
   <div style="text-align: center;">
-    <img src="Screenshot_mesh.png" alt="Description of Image 2" width="300"/>
-    <p>Resulting alpha-shape for a given alpha value, along with the projected surface on the ground. </p>
+    <img src="Screenshot_mesh.png" alt="Description of Image 2" width="450"/>
+    <p> Resulting alpha-shape for a given alpha value, along with the projected surface on the ground. </p>
   </div>
 </div>
 
