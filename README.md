@@ -19,6 +19,8 @@ Below are two example images demonstrating the functionality of the project:
   </div>
 </div>
 
+## Usage
+After installing the code (see instructions below), you can run it as you want by modifying the following parameters in the main program (```envelope_cloud.py```)
 
 ## Installation
 
