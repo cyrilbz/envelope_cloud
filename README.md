@@ -1,5 +1,20 @@
 # envelope_cloud
-Python tool to compute the envelope (alpha shape) of a 3D point cloud, save it and  save some related metrics (volume and area of the alpha shape, projected area on the ground, accuracy of the alpha shape, number of envelopes).
+Python tool to compute the envelope (alpha shape) of a 3D point cloud (stored in a .txt file, but with some minor modifications, other type of files could be treated), save it and  save some related metrics (volume and area of the alpha shape, projected area on the ground, accuracy of the alpha shape, number of envelopes).
+
+## Example
+
+Below are two example images demonstrating the functionality of the project:
+
+<div style="display: flex; justify-content: space-around; align-items: center;">
+  <div style="text-align: center;">
+    <img src="Screenshot_cloud.png" alt="Description of Image 1" width="300"/>
+    <p>Legend for Image 1: This image shows [describe the content or purpose of the image].</p>
+  </div>
+  <div style="text-align: center;">
+    <img src="Screenshot_mesh.png" alt="Description of Image 2" width="300"/>
+    <p>Legend for Image 2: This image shows [describe the content or purpose of the image].</p>
+  </div>
+</div>
 
 
 ![Screenshot](Screenshot_cloud.png)
