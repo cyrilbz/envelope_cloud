@@ -26,7 +26,7 @@ Below are two example images demonstrating the functionality of the project:
 </div>
 
 
-The code outputs in the console and in the output file the alpha shape volume and area, the projected surface on the ground, the accuracy of the alpha shape regarding the point cloud (check the ratio of points inside the envelope compared to the full set of points), and the number of meshes in case of multiple envelopes.
+The code outputs in the console and in the output file the alpha value, the alpha shape volume and area, the projected surface on the ground, the accuracy of the alpha shape regarding the point cloud (check the ratio of points inside the envelope to the full set of points), and the number of meshes in case of multiple envelopes.
 
 
 ## Usage
