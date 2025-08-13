@@ -65,7 +65,7 @@ Ensure you have the following installed on your system:
 
 1. **Clone the Repository**
 
-   Open a terminal and run the following command to clone the repository:
+   Open a terminal (or Anaconda prompt on Windows) and run the following command to clone the repository:
 
    ```bash
    git clone git@github.com:cyrilbz/envelope_cloud.git
