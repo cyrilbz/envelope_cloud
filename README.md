@@ -26,7 +26,7 @@ Below are two example images demonstrating the functionality of the project:
 </div>
 
 
-The code outputs in the console and in the output file the alpha value, the alpha shape volume and area, the projected surface on the ground, the accuracy of the alpha shape regarding the point cloud (check the ratio of points inside the envelope to the full set of points), and the number of meshes in case of multiple envelopes.
+The code outputs in the console and in the output file the alpha value, the alpha shape volume and area, the projected surface on the ground, the accuracy of the alpha shape regarding the point cloud (checks the ratio of points inside the envelope to the full set of points), and the number of meshes in case of multiple envelopes.
 
 
 ## Usage
@@ -41,6 +41,14 @@ sampling_ratio = 1/10
 output_file_name = 'results.csv' # written in "directory"
 plot_results = False # option to plot results using open3d
 ################################################################
+```
+Do not forget to activate your dedicated conda environment (see instructions below),
+```bash
+conda activate envelope
+```
+then run the code !
+```bash
+python envelope_cloud.py
 ```
 
 ## Installation
@@ -57,7 +65,7 @@ Ensure you have the following installed on your system:
 
 1. **Clone the Repository**
 
-   Open a terminal and run the following command to clone the repository:
+   Open a terminal (or Anaconda prompt on Windows) and run the following command to clone the repository:
 
    ```bash
    git clone git@github.com:cyrilbz/envelope_cloud.git
@@ -72,7 +80,12 @@ Ensure you have the following installed on your system:
 
    pip install -r requirements.txt
    ```
-3. Modify the input parameters as you want and run the code!
+3. LINUX USERS
+   You might have to install an additional library to have the open3d viewer option to work:
+   ```bash
+   conda install -c conda-forge libstdcxx-ng
+   ```
+5. Modify the input parameters as you want and run the code!
    ```python
    python envelope_cloud.py
    ```
