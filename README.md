@@ -37,7 +37,7 @@ After installing the code (see instructions below), you can run it as you want b
 # relative or absolute path to the directory containing files to study
 directory = './test_data' 
 alpha=0.3
-sampling_ratio = 1/10
+minimal_distance = 0.035
 output_file_name = 'results.csv' # written in "directory"
 plot_results = False # option to plot results using open3d
 ################################################################
