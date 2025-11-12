@@ -14,10 +14,10 @@ Created on Tue Jun  3 11:02:49 2025
 ########################## Inputs ##############################
 # relative or absolute path to the directory containing files to study
 directory = './test_data' 
-alpha=0.3
-sampling_ratio = 1/10
+alpha=0.2
+minimal_distance = 0.035
 output_file_name = 'results.csv' # written in "directory"
-plot_results = False # option to plot results using open3d
+plot_results = True # option to plot results using open3d
 ################################################################
 
 import os
@@ -28,12 +28,16 @@ from functions import (read_from_txt, write_results_to_csv,
                         check_envelop_accuracy, z_project)
 import numpy as np
 
-#################### Extract all  .txt file names #############
+#################### Extract all .txt file names #############
 
-# Lister tous les fichiers dans le dossier
+# Llist all file in the directory
 file_list = os.listdir(directory)
-# Filtrer les fichiers .txt
-file_list_txt = [f for f in file_list if f.endswith('.txt')]
+
+# filter txt files
+# file_list_txt = [f for f in file_list if f.endswith('.txt')]
+
+# or provide them directly as a list
+file_list_txt = ['Cloud1.txt']
 
 ################### Main loop ##################################
 for file in file_list_txt:
@@ -43,11 +47,13 @@ for file in file_list_txt:
     ############### Data extraction ##################
     
     pcd = read_from_txt(file_path) # returns open3d point cloud
+    print(f"Original file has {len(pcd.points)} points")
     
     pcd_complete = o3d.geometry.PointCloud(pcd) # save the original point cloud
     
-    # point sampling (2nd parameter : sampling ratio in [0-1])
-    o3d.geometry.PointCloud.random_down_sample(pcd,sampling_ratio)
+    # Downsample following a given voxel grid 
+    pcd = pcd.voxel_down_sample(voxel_size=minimal_distance)
+    print(f"After voxel down sampling: {len(pcd.points)} points")
     
     ################## alpha shape ###################
     
@@ -56,9 +62,20 @@ for file in file_list_txt:
     # using open3d built-in function
     o3d_alpha = create_alpha_shape(pcd, alpha)
     
+    # Print initial stats
+    print("Before cleaning:")
+    print(f"  Vertices: {len(o3d_alpha.vertices)}")
+    print(f"  Triangles: {len(o3d_alpha.triangles)}")
+    
     #################### repair  mesh ######################
     
+    repaired_o3d_alpha = o3d.geometry.TriangleMesh(o3d_alpha) # copy mesh for safety
     repaired_o3d_alpha, volume, area = repair_non_manifold_o3d_mesh(o3d_alpha)
+    
+    # Print stats after cleaning
+    print("\nAfter cleaning:")
+    print(f"  Vertices: {len(repaired_o3d_alpha.vertices)}")
+    print(f"  Triangles: {len(repaired_o3d_alpha.triangles)}")
     
     #### Compute accuracy of the envelope regarding original cloud ####
     
@@ -66,14 +83,14 @@ for file in file_list_txt:
     print(f"\n ALPHA SHAPE ACCURACY [%] : {ratio}")
     print(f"\n NUMBER OF MESHES [-] : {n_meshes}")
     
-    #################### 2D projection #####################
+    # #################### 2D projection #####################
     
     # project the reduced point cloud "pcd" (can be changed to "pcd_complete")
     copy_pcd = o3d.geometry.PointCloud(pcd) # copy for safety 
     o3d_surf, projected_area = z_project(np.asarray(copy_pcd.points), alpha)
     print(f"\n PROJECTED AREA ON THE GROUND [m2] : {projected_area}")
     
-    #################### save alpha shape as .obj #######################
+    # #################### save alpha shape as .obj #######################
     
     # Extract file base name
     base_name = os.path.splitext(file_path)[0]
@@ -105,7 +122,7 @@ for file in file_list_txt:
     if plot_results:
         print("PLOTTING OPTION ACTIVATED - CLOSE OPEN3D WINDOW TO ANALYZE THE NEXT FILE")
         geoms = [{"name":"Point cloud", "geometry": pcd},
-                 {"name":"z projection", "geometry": o3d_surf},
-                 {"name":"Alpha shape", "geometry": repaired_o3d_alpha}]
+                 {"name":"Repaired Alpha shape", "geometry": repaired_o3d_alpha},
+                 {"name":"Projected area", "geometry": o3d_surf}]
         
         o3d.visualization.draw(geoms, show_ui=True)

@@ -105,8 +105,12 @@ def repair_non_manifold_o3d_mesh(o3d_mesh):
         tin.load_array(v, f) # Load known vertices and faces
 
         # Fill holes (check other mesh cleaning options on pymesh API)
+        tin.join_closest_components()
+        tin.remove_smallest_components()
         tin.fill_small_boundaries()
         vclean, fclean = tin.return_arrays() # Get new vertices and faces
+        
+        ###vclean,fclean = pymeshfix.clean_from_arrays(v, f) # interesting but with less control!
 
         # Convert faces to PyVista format
         fclean_pv = np.hstack([np.full((fclean.shape[0], 1), 3), fclean]).flatten()
@@ -207,7 +211,7 @@ def z_project(points, alpha):
         A tuple containing the Open3D mesh of the projected surface and the projected area.
     """
     # Compute projection plane z location
-    z_const = 0.0
+    z_const = 0.99*np.mean(points[:,2])
     points[:, 2] = z_const # Project point cloud
 
     # Create a point cloud object
@@ -267,3 +271,20 @@ def write_results_to_csv(results, output_file_name):
         writer.writerow(row)
 
     print(f"Results have been written to {output_file_name}")
+    
+def remove_small_triangles(mesh, min_area=1e-4):
+    # Get vertices and triangles
+    vertices = np.asarray(mesh.vertices)
+    triangles = np.asarray(mesh.triangles)
+
+    # Calculate the area of each triangle
+    v0 = vertices[triangles[:, 0]]
+    v1 = vertices[triangles[:, 1]]
+    v2 = vertices[triangles[:, 2]]
+    areas = 0.5 * np.linalg.norm(np.cross(v1 - v0, v2 - v0), axis=1)
+
+    # Filter out small triangles
+    mask = areas >= min_area
+    mesh.triangles = o3d.utility.Vector3iVector(triangles[mask])
+
+    return mesh
