@@ -14,7 +14,7 @@ Created on Tue Jun  3 11:02:49 2025
 ########################## Inputs ##############################
 # relative or absolute path to the directory containing files to study
 directory = './test_data' 
-alpha=0.2
+alpha=0.5
 minimal_distance = 0.035 # voxel size for downsampling by voxelisation
 output_file_name = 'results.csv' # written in "directory"
 plot_results = True # option to plot results using open3d
@@ -54,6 +54,9 @@ for file in file_list_txt:
     # Downsample following a given voxel grid 
     pcd = pcd.voxel_down_sample(voxel_size=minimal_distance)
     print(f"After voxel down sampling: {len(pcd.points)} points")
+    
+    # outlier removal by distance and nb
+    #[pcd, listpoints] =  o3d.geometry.PointCloud.remove_radius_outlier(pcd, 10, 0.5)
     
     ################## alpha shape ###################
     
@@ -99,7 +102,7 @@ for file in file_list_txt:
     obj_name = f"{base_name}_alpha_shape_{alpha}.obj"
     
     # write
-    o3d.io.write_triangle_mesh(obj_name, repaired_o3d_alpha)  # OBJ format
+    o3d.io.write_triangle_mesh(obj_name, repaired_o3d_alpha, write_ascii=True, write_vertex_normals=False, print_progress=True)  # OBJ format
     
     ################### gather results and save ####################
     

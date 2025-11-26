@@ -33,12 +33,12 @@ def read_from_txt(filepath):
     """
     data = np.loadtxt(filepath) # Load the point cloud from the text file using numpy
     xyz = data[:,:3] # Extract point cloud coordinates
-    rgb = data[:,3:6]/255 # Get point cloud original colors. Must be rescaled in [0,1]!
+    #rgb = data[:,3:6]/255 # Get point cloud original colors. Must be rescaled in [0,1]!
 
     # Point cloud creation
     pcd = o3d.geometry.PointCloud() # Initialize a point cloud object
     pcd.points = o3d.utility.Vector3dVector(xyz) # Convert numpy coordinates to open3d format
-    pcd.colors = o3d.utility.Vector3dVector(rgb) # Add colors
+    #pcd.colors = o3d.utility.Vector3dVector(rgb) # Add colors
     return pcd
 
 def o3d_to_pyvista(o3d_mesh):
