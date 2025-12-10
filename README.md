@@ -59,7 +59,7 @@ To install and set up the project, follow these steps:
 
 Ensure you have the following installed on your system:
 - [Git](https://git-scm.com/)
-- [Anaconda](https://www.anaconda.com/products/distribution) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+- A free Python packages & environment manager (e.g., [Miniforge](https://github.com/conda-forge/miniforge]))
 
 ### Step-by-Step Guide
 
